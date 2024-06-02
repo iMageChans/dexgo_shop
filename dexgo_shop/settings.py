@@ -113,6 +113,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'dexgo_shop.wsgi.application'
+ASGI_APPLICATION = 'dexgo_shop.asgi.application'
 
 
 # Database
