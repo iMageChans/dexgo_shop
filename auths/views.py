@@ -17,8 +17,9 @@ class RegisterView(generics.CreateAPIView):
         response = super().create(request, *args, **kwargs)
         user = User.objects.get(username=response.data['username'])
         refresh = RefreshToken.for_user(user)
-        userGroup = Group.objects.get(name=response.data['user'])
-        user.groups.add(userGroup)
+        user_group, created = Group.objects.get_or_create(name='user')
+        user.groups.add(user_group)
+        user.save()
         response.data['refresh'] = str(refresh)
         response.data['access'] = str(refresh.access_token)
         return response
